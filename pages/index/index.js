@@ -54,5 +54,27 @@ Page({
         userInfo:userInfo
       })
     })
+  },
+  onShow(){
+    if(!interval&&this.data.time!=0){
+      interval = setInterval(()=>{
+          this.setData({
+            time: this.data.time +1,
+            displayTime: this.parseTime(this.data.time)
+          })
+        }, 10);
+      }
+  },
+  onHide(){
+    console.log('onHide...')
+    if(interval){
+      clearInterval(interval);
+      interval = null;
+    }else{
+      this.setData({
+        time: 0,
+        displayTime: '00:00:00'
+      })
+    }
   }
 })
